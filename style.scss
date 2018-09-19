@@ -1,7 +1,82 @@
+@import url('https://fonts.googleapis.com/css?family=PT+Sans|Raleway');
+$pink: #BB7777;
+$yellow: #EECC33;
+$green: #77BB77;
+$white: #EEE;
+$circle: 4em;
+@mixin user-select($property) {
+    -webkit-touch-callout: $property;
+    -webkit-user-select: $property;
+    -moz-user-select: $property;
+    -ms-user-select: $property;
+    user-select: $property;
+}
 *, *::before, *::after {
     box-sizing: border-box;
+    font-family: 'PT Sans', sans-serif;
 }
 body {
     margin: 0;
     padding: 0;
+}
+section {
+    position: relative;
+    padding: 30vh 0;
+    text-align: center;
+    color: $white;
+}
+#hero {
+    background: $pink;
+    &::before,
+    &::after {
+        position: absolute;
+        content: '';
+        background: $pink;
+        width: 50%;
+        height: 2em;
+        bottom: -1em;
+        z-index: 2;
+    }
+    &::before {
+        right: 50%;
+        -webkit-clip-path: polygon(10% 100%, 0 0, 100% 0, 90% 100%, 80% 0, 70% 100%, 60% 0, 50% 100%, 40% 0, 30% 100%, 20% 0);
+        clip-path: polygon(10% 100%, 0 0, 100% 0, 90% 100%, 80% 0, 70% 100%, 60% 0, 50% 100%, 40% 0, 30% 100%, 20% 0);
+    }
+    &::after {
+        -webkit-clip-path: polygon(10% 100%, 0 0, 100% 0, 90% 100%, 80% 0, 70% 100%, 60% 0, 50% 100%, 40% 0, 30% 100%, 20% 0);
+        clip-path: polygon(10% 100%, 0 0, 100% 0, 90% 100%, 80% 0, 70% 100%, 60% 0, 50% 100%, 40% 0, 30% 100%, 20% 0);
+    }
+}
+#hero-circle {
+    @include user-select(none);
+    cursor: default;
+    margin: 0 auto;
+    line-height: $circle*0.9375;
+    color: rgba(0, 0, 0, .5);
+    font-weight: 900;
+    font-size: 2em;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, .25);
+    width: $circle;
+    height: $circle;
+    z-index: 200;
+}
+#main {
+    background: $yellow;
+    margin-top: -1em;
+}
+#footer {
+    background: $green;
+}
+nav {
+    background: rgba (0,0,0,0);
+    position: absolute;
+    right: 0;
+    padding: 0 1em;
+    ul li {
+        display: inline-block;
+        color: $white;
+        font-size: 1.325rem;
+        padding: 0 1em;
+    }
 }
