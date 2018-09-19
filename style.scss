@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=PT+Sans|Raleway');
+@import url('https://fonts.googleapis.com/css?family=Pacifico');
 $pink: #BB7777;
 $yellow: #EECC33;
 $green: #77BB77;
@@ -11,9 +12,14 @@ $circle: 4em;
     -ms-user-select: $property;
     user-select: $property;
 }
+@mixin clip-path($property) {
+    -webkit-clip-path: $property;
+    clip-path: $property;
+}
 *, *::before, *::after {
     box-sizing: border-box;
     font-family: 'PT Sans', sans-serif;
+    -webkit-font-smoothing: antialiased;
 }
 body {
     margin: 0;
@@ -35,16 +41,19 @@ section {
         width: 50%;
         height: 2em;
         bottom: -1em;
-        z-index: 2;
+        z-index: 4;
+    }
+    h1 {
+        font-family: 'Pacifico', cursive;
+        font-size: 3.5em;
+        margin-top: 0;
     }
     &::before {
         right: 50%;
-        -webkit-clip-path: polygon(10% 100%, 0 0, 100% 0, 90% 100%, 80% 0, 70% 100%, 60% 0, 50% 100%, 40% 0, 30% 100%, 20% 0);
-        clip-path: polygon(10% 100%, 0 0, 100% 0, 90% 100%, 80% 0, 70% 100%, 60% 0, 50% 100%, 40% 0, 30% 100%, 20% 0);
+        @include clip-path(polygon(10% 100%, 0 0, 100% 0, 90% 100%, 80% 0, 70% 100%, 60% 0, 50% 100%, 40% 0, 30% 100%, 20% 0));
     }
     &::after {
-        -webkit-clip-path: polygon(10% 100%, 0 0, 100% 0, 90% 100%, 80% 0, 70% 100%, 60% 0, 50% 100%, 40% 0, 30% 100%, 20% 0);
-        clip-path: polygon(10% 100%, 0 0, 100% 0, 90% 100%, 80% 0, 70% 100%, 60% 0, 50% 100%, 40% 0, 30% 100%, 20% 0);
+        @include clip-path(polygon(10% 100%, 0 0, 100% 0, 90% 100%, 80% 0, 70% 100%, 60% 0, 50% 100%, 40% 0, 30% 100%, 20% 0));
     }
 }
 #hero-circle {
@@ -59,20 +68,27 @@ section {
     background: rgba(0, 0, 0, .25);
     width: $circle;
     height: $circle;
-    z-index: 200;
+    z-index: 100;
 }
 #main {
     background: $yellow;
-    margin-top: -1em;
+    margin-top: calc(-1em + 1px);
+    @include clip-path(polygon(0 0, 100% 0, 100% calc(100% - 10vw), 0 100%));
+    z-index: 3;
+}
+#clip-img {
+    @include clip-path(polygon(0 0, 100% 10%, 95% 100%, 10% 90%));
 }
 #footer {
     background: $green;
+    margin-top: -10vw;
 }
 nav {
     background: rgba (0,0,0,0);
     position: absolute;
     right: 0;
     padding: 0 1em;
+    z-index: 200;
     ul li {
         display: inline-block;
         color: $white;
