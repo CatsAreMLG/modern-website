@@ -1,9 +1,11 @@
 @import url('https://fonts.googleapis.com/css?family=PT+Sans|Raleway');
 @import url('https://fonts.googleapis.com/css?family=Pacifico');
-$pink: #BB7777;
-$yellow: #EECC33;
-$green: #77BB77;
-$white: #EEE;
+$pink: rgb(232, 128, 169);
+$dark-pink: #874A5F;
+$yellow: rgb(199, 179, 88);
+$light-brown: #9E6435;
+$brown: rgb(88, 52, 31);
+$white: rgb(255, 237, 203);
 $circle: 4em;
 @mixin user-select($property) {
     -webkit-touch-callout: $property;
@@ -21,9 +23,13 @@ $circle: 4em;
     font-family: 'PT Sans', sans-serif;
     -webkit-font-smoothing: antialiased;
 }
+h1 {
+    font-size: 2em;
+}
 body {
     margin: 0;
     padding: 0;
+    overflow-x: hidden;
 }
 section {
     position: relative;
@@ -31,48 +37,63 @@ section {
     text-align: center;
     color: $white;
 }
+#filter {
+    height: 100vh;
+    width: 100vw;
+    background: rgba(232, 128, 169, .7);
+    position: absolute;
+    z-index: 3;
+}
 #hero {
-    background: $pink;
+    background-image: url(http://portsoyicecream.co.uk/site/wp-content/uploads/ice-cream-collection-1600x1067.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
     &::before,
     &::after {
         position: absolute;
         content: '';
-        background: $pink;
+        background: $white;
         width: 50%;
         height: 2em;
-        bottom: -1em;
+        bottom: -1;
         z-index: 4;
     }
     h1 {
+        position: relative;
         font-family: 'Pacifico', cursive;
-        font-size: 3.5em;
+        font-size: 6vmax;
         margin-top: 0;
+        z-index: 100;
     }
     &::before {
-        right: 50%;
-        @include clip-path(polygon(10% 100%, 0 0, 100% 0, 90% 100%, 80% 0, 70% 100%, 60% 0, 50% 100%, 40% 0, 30% 100%, 20% 0));
+        right: calc(50% - 1px);
+        @include clip-path(polygon(0 0, 0 100%, 100% 100%, 100% 0, 90% 100%, 80% 0, 70% 100%, 60% 0, 50% 100%, 40% 0, 30% 100%, 20% 0, 10% 100%));
+        // @include clip-path(polygon(10% 100%, 0 0, 100% 0, 90% 100%, 80% 0, 70% 100%, 60% 0, 50% 100%, 40% 0, 30% 100%, 20% 0));
     }
     &::after {
-        @include clip-path(polygon(10% 100%, 0 0, 100% 0, 90% 100%, 80% 0, 70% 100%, 60% 0, 50% 100%, 40% 0, 30% 100%, 20% 0));
+        @include clip-path(polygon(0 0, 0 100%, 100% 100%, 100% 0, 90% 100%, 80% 0, 70% 100%, 60% 0, 50% 100%, 40% 0, 30% 100%, 20% 0, 10% 100%));
+        // @include clip-path(polygon(10% 100%, 0 0, 100% 0, 90% 100%, 80% 0, 70% 100%, 60% 0, 50% 100%, 40% 0, 30% 100%, 20% 0));
     }
 }
 #hero-circle {
     @include user-select(none);
     cursor: default;
+    position: relative;
     margin: 0 auto;
     line-height: $circle*0.9375;
-    color: rgba(0, 0, 0, .5);
+    color: rgba(0, 0, 0, .65);
     font-weight: 900;
     font-size: 2em;
     border-radius: 50%;
-    background: rgba(0, 0, 0, .25);
+    background: rgba(0, 0, 0, .45);
     width: $circle;
     height: $circle;
     z-index: 100;
 }
 #main {
-    background: $yellow;
-    margin-top: calc(-1em + 1px);
+    color: $pink;
+    background: $white;
     @include clip-path(polygon(0 0, 100% 0, 100% calc(100% - 10vw), 0 100%));
     z-index: 3;
 }
@@ -80,7 +101,7 @@ section {
     @include clip-path(polygon(0 0, 100% 10%, 95% 100%, 10% 90%));
 }
 #footer {
-    background: $green;
+    background: $light-brown;
     margin-top: -10vw;
 }
 nav {
